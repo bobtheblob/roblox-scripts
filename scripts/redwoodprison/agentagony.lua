@@ -266,6 +266,7 @@ local renderPart = getgenv().FEEffects.Part
 local renderSphere = getgenv().FEEffects.Sphere
 local renderCylinder = getgenv().FEEffects.Cylinder
 --
+local it = false
 local renderModels = {
 	Shedo = function(pos)
 		renderPart({
@@ -450,6 +451,192 @@ renderModels.tors = function(pos,col)
 		trans = 0,
 	})
 end
+renderModels.introface = function(pos,col)
+	renderPart({
+		size = Vector3.new(0.22499994933605194, 0.32500001788139343, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.237510681, 0.512499332, -1.35439301, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.22499996423721313, 0.29999998211860657, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.262489319, 0.524999142, -1.35439301, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.44999995827674866, 0.05000000074505806, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.250009537, 0.699999332, -1.35439301, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.4249999523162842, 0.04999998211860657, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.287490845, 0.699999094, -1.35439301, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.29999998211860657, 0.07499997317790985, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.321357727, -0.525187969, -1.35439301, 0.965925813, 0.258819044, 0, -0.258819044, 0.965925813, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.29999998211860657, 0.07499997317790985, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.325576782, -0.525187969, -1.35439301, 0.965925813, -0.258819044, 0, 0.258819044, 0.965925813, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.3999999761581421, 0.07499998062849045, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.00210952759, -0.488554955, -1.35439301, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.19999997317790985, 0.04999998211860657, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.0228919983, -0.626054883, -1.35439301, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+end
+renderModels.face = function(pos,col)
+	renderPart({
+		size = Vector3.new(0.7249999046325684, 0.07499998807907104, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.0124912262, -0.237500787, -1.35552025, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.07499987632036209, 0.42499998211860657, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.410531998, -0.467310905, -1.35552025, 0.965925813, -0.258819044, 0, 0.258819044, 0.965925813, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.07499987632036209, 0.42499998211860657, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.389467239, -0.467310905, -1.35552025, 0.965925813, 0.258819044, 0, -0.258819044, 0.965925813, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.4249998927116394, 0.04999999329447746, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.256017685, -0.603128612, -1.35552025, 0.965925813, -0.258819044, 0, 0.258819044, 0.965925813, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.4249998927116394, 0.04999999329447746, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.243982315, -0.603128672, -1.35552025, 0.965925813, 0.258819044, 0, -0.258819044, 0.965925813, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.1749999225139618, 0.04999999329447746, 0.39999985694885254),
+		startpos = pos*CFrame.new(-5.53131104e-05, -0.55783534, -1.35552025, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.12499988824129105, 0.12499996274709702, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.367839813, -0.464075565, -1.35552025, 0.707106709, -0.707106769, 0, 0.707106769, 0.707106709, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.09999988228082657, 0.2749999761581421, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.398458481, -0.51884234, -1.35552025, 0.965925694, -0.258819044, 0, 0.258819044, 0.965925694, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.12499988824129105, 0.09999996423721313, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.357013702, -0.407825589, -1.35552025, 0.499999911, -0.866025329, 0, 0.866025329, 0.499999911, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.12499988824129105, 0.09999996423721313, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.346334457, -0.407825589, -1.35552025, -0.499999911, 0.866025329, 0, 0.866025329, 0.499999911, 0, 0, 0, -1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.12499988824129105, 0.12499996274709702, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.357160568, -0.464075565, -1.35552025, -0.707106709, 0.707106769, 0, 0.707106769, 0.707106709, 0, 0, 0, -1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.09999988228082657, 0.2749999761581421, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.401540756, -0.51884234, -1.35552025, 0.965925694, 0.258818984, 0, -0.258818984, 0.965925694, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.09999996423721313, 0.3499999940395355, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.197841644, 0.856502533, -1.35552025, -0.258818984, -0.965925813, 0, -0.965925813, 0.258818984, 0, -0, 0, -1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.09999996423721313, 0.15000000596046448, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.431966782, 0.89999938, -1.35552025, 5.96046448e-08, -1, 0, -1, -5.96046448e-08, 0, 0, 0, -1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.19999995827674866, 0.3499999940395355, 0.39999985694885254),
+		startpos = pos*CFrame.new(-0.249990463, 0.599999189, -1.35552025, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.09999996423721313, 0.3499999940395355, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.197841644, 0.856502533, -1.35552025, -0.258818984, 0.965925813, 0, 0.965925813, 0.258818984, 0, 0, 0, -1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.09999996423721313, 0.15000000596046448, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.431968689, 0.89999938, -1.35552025, 5.96046448e-08, 1, 0, 1, -5.96046448e-08, 0, 0, 0, -1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+	renderPart({
+		size = Vector3.new(0.19999995827674866, 0.3499999940395355, 0.39999985694885254),
+		startpos = pos*CFrame.new(0.249990463, 0.599999189, -1.35552025, 1, 0, 0, 0, 1, 0, 0, 0, 1),
+		Color = Color3.new(0.0666667, 0.0666667, 0.0666667),
+		material = Enum.Material.Plastic,
+		trans = 0,
+	})
+end
 --
 local fakechar = game:GetService("Players"):CreateHumanoidModelFromDescription(Instance.new("HumanoidDescription"),"R6")
 local lastpos = lplr.Character:GetPivot()
@@ -461,6 +648,7 @@ local con
 local hum = fakechar:FindFirstChildWhichIsA("Humanoid")
 local charhum = lplr.Character:FindFirstChildWhichIsA("Humanoid")
 local lasttick = tick()
+local FakeHead
 con = game:GetService("RunService").Heartbeat:Connect(function()
 	hum:Move(charhum.MoveDirection,false)
 	hum.Jump = charhum.Jump
@@ -471,6 +659,13 @@ con = game:GetService("RunService").Heartbeat:Connect(function()
 				local s = v.Size
 				if v.Name == "Head" then
 					s = v3(s.Z,s.Z,s.Z)
+					if FakeHead then
+						if it then
+							--renderModels.face(FakeHead.CFrame)
+						else
+							--renderModels.introface(FakeHead.CFrame)
+						end
+					end
 				end
 				if v.Name == "Torso" then
 					renderModels.tors(v.CFrame,c3())
@@ -498,13 +693,15 @@ con = game:GetService("RunService").Heartbeat:Connect(function()
 						material = v.Material,
 					})
 				else
-					getgenv().FEEffects.Part({
-						size = s,
-						startpos = v.CFrame,
-						trans = v.Transparency,
-						Color = v.Color,
-						material = v.Material,
-					})
+					if v.Name:find("Leg") == nil and v.Name:find("Torso") == nil then
+						getgenv().FEEffects.Part({
+							size = s,
+							startpos = v.CFrame,
+							trans = v.Transparency,
+							Color = v.Color,
+							material = v.Material,
+						})
+					end
 				end
 			end
 		end
@@ -564,7 +761,7 @@ elseif lplr.Team == nil then
 	char = lplr.Character
 	charhum = char:FindFirstChildWhichIsA("Humanoid")
 	char:PivotTo(lastpos)
-	
+
 end
 local con2
 --
@@ -2394,7 +2591,7 @@ end)()
 local lt = tick()
 local pistolsize = v3(1, 3, 5)
 local sgsize = v3(12, 3, 2)
-
+it = true
 while true do
 	swait()
 	Head.Transparency = 1
@@ -2512,6 +2709,7 @@ while true do
 		lt = tick()
 		if IntroDone then
 			renderModels.Shedo(FakeHead.CFrame)
+			
 		end
 		if CurrentWep == "Shotgun" then
 			getgenv().FEEffects.Part({

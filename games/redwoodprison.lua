@@ -169,7 +169,10 @@ end
 local scripts = {
 	['Dominus Astra'] = 'https://raw.githubusercontent.com/bobtheblob/sads/main/scripts/redwoodprison/dominusastra.lua',
 	['Agent Agony'] = 'https://raw.githubusercontent.com/bobtheblob/sads/main/scripts/redwoodprison/agentagony.lua',
-	['Studio Dummy V3'] = 'https://raw.githubusercontent.com/bobtheblob/sads/main/scripts/redwoodprison/sdv3.lua'
+	['Studio Dummy V3'] = 'https://raw.githubusercontent.com/bobtheblob/sads/main/scripts/redwoodprison/sdv3.lua',
+	['Server Admin'] = 'https://raw.githubusercontent.com/bobtheblob/sads/main/scripts/redwoodprison/serveradmin.lua',
+	['Blind Reaper'] = 'https://raw.githubusercontent.com/bobtheblob/sads/main/scripts/redwoodprison/blindreaper.lua',
+			
 }
 local lib = httprequire("https://pastebin.com/raw/JUFhCJLQ")
 local cam = workspace.CurrentCamera

@@ -522,7 +522,7 @@ function gui:newWindow(name)
 					local num = (size / maxSize)
 					local num100 = max * (size / maxSize)
 					if donum then
-						local num100 = donum
+						num100 = donum
 					end
 					
 					num100 = math.floor(num100)

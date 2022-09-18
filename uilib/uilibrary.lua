@@ -385,7 +385,7 @@ function gui:newWindow(name)
 			UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
 			UIListLayout_3.Padding = UDim.new(0, 5)
 			local ts = {}
-			local ButtonList = 0
+			local ButtonList = {}
 			function ts:createButton(name,func)
 				local ButtonTemp = Instance.new("TextButton")
 				table.insert(ButtonList,ButtonTemp)

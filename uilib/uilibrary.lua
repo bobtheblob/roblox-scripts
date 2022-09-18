@@ -507,18 +507,25 @@ function gui:newWindow(name)
 					return
 				end
 				local function move()
-					local maxSize = as.X
-					local size = Slider.Size.X.Offset
-					local num = (size / maxSize)
-					local num100 = max * (size / maxSize)
-					num100 = math.floor(num100)
+					local donum
 					if mouse.X < ap.X then
 						Slider.Size = UDim2.new(0, 0, 1, 0)
 					elseif mouse.X > (ap.X+as.X) then
 						Slider.Size = UDim2.new(1, 0, 1, 0)
+						donum = max
 					else
 						Slider.Size = UDim2.new(0, mouse.X-ap.X, 1, 0)
+						
 					end
+					local maxSize = as.X
+					local size = Slider.Size.X.Offset
+					local num = (size / maxSize)
+					local num100 = max * (size / maxSize)
+					if donum then
+						local num100 = donum
+					end
+					
+					num100 = math.floor(num100)
 					TextBox.Text = num100
 					movedevent:Fire(num100)
 				end

@@ -1,13 +1,11 @@
---[[ Documentation
 
+--[[ Documentation
 // gui
 gui:newWindow(name)
 	name = string
 	returns window
 // window
-
 window.isremoved : bool
-
 window:createTab(name)
 	name = string
 	returns tab
@@ -32,6 +30,15 @@ tab:createTextbox(name,func)
 tab:createLabel(text)
 	text = string
 	returns label
+tab:createSlider(name,min,max,default)
+	name = string
+	min = number
+	max = number
+	default = number
+	returns slider
+	
+tab.onRemove = event
+tab.isremoved = bool
 // label
 label:update(text,size,font)
 	text = string
@@ -56,6 +63,15 @@ toggle:getToggled()
 	returns boolean
 	
 toggle:update(boolean)
+
+// slider
+slider:getValue()
+	returns number
+	
+slider:setValue(number)
+
+slider.onMove = event
+
 ]]
 
 --[[ Example
@@ -80,20 +96,30 @@ bts:createButton("Button3",function()
 end)
 ]]
 --
+local player = game:GetService('Players').LocalPlayer
+local mouse = player:GetMouse()
 local tabb = {}
 local tb = {}
 local buttons = {}
 local toggle = {}
 local gui = {}
+local slider = {}
 tb.__index = tb
 buttons.__index = buttons
 toggle.__index = toggle
 tabb.__index = tabb
 gui.__index = gui
+slider.__index = slider
 function fakehui()
 	return game:GetService("CoreGui")
 end
 local hui = fakehui
+local userealhui = {
+	--[286090429] = true -- arsenal
+}
+if userealhui[game.PlaceId] then
+	hui = gethui
+end
 function gui:newWindow(name)
 	local ScreenGui = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
@@ -117,6 +143,7 @@ function gui:newWindow(name)
 	}
 	ScreenGui.Parent = hui()
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	ScreenGui.Name = math.random(-2^22,2^22)
 
 	Main.Name = "Main"
 	Main.Parent = ScreenGui
@@ -144,7 +171,7 @@ function gui:newWindow(name)
 
 	UIListLayout.Parent = Categories
 	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout.Padding = UDim.new(0.00999999978, 0)
+	UIListLayout.Padding = UDim.new(0, 1)
 	Categories.ChildAdded:Connect(function()
 		Categories.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y+100)
 	end)
@@ -249,7 +276,7 @@ function gui:createTab(name)
 	Tab.Parent = self.Categories
 	Tab.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
 	Tab.BorderSizePixel = 0
-	Tab.Size = UDim2.new(0, 68, 0, 24)
+	Tab.Size = UDim2.new(1,0, 0, 24)
 	Tab.Font = Enum.Font.SourceSans
 	Tab.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Tab.TextScaled = true
@@ -395,7 +422,132 @@ end
 function tb:update(txt)
 	self.TextBox.Text = txt
 end
+function tabb:createSlider(name,min,max,default)
+	local movedevent = Instance.new("BindableEvent")
+	local Frame = Instance.new("Frame")
+	Frame.Size = UDim2.new(1, 0, 0.1208791, 26)
+	Frame.BorderSizePixel = 0
+	Frame.BackgroundColor3 = Color3.fromRGB(91, 91, 91)
 
+	local Title = Instance.new("TextLabel")
+	Title.Name = "Title"
+	Title.Size = UDim2.new(0, 100, 0, 25)
+	Title.BackgroundTransparency = 1
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.FontSize = Enum.FontSize.Size24
+	Title.TextStrokeTransparency = 0.5
+	Title.TextSize = 20
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.Text = name
+	Title.Font = Enum.Font.SourceSans
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	Title.Parent = Frame
+
+	local Bar = Instance.new("Frame")
+	Bar.Name = "Bar"
+	Bar.AnchorPoint = Vector2.new(0.5, 0.5)
+	Bar.Size = UDim2.new(0, 300, 0, 10)
+	Bar.Position = UDim2.new(0.5, 0, 0, 32)
+	Bar.BorderSizePixel = 0
+	Bar.BackgroundColor3 = Color3.fromRGB(108, 108, 108)
+	Bar.Parent = Frame
+
+	local Slider = Instance.new("Frame")
+	Slider.Name = "Slider"
+	Slider.AnchorPoint = Vector2.new(0, 0.5)
+	Slider.Size = UDim2.new(0, 0, 1, 0)
+	Slider.Position = UDim2.new(0, 0, 0.5, 0)
+	Slider.BorderSizePixel = 0
+	Slider.BackgroundColor3 = Color3.fromRGB(231, 231, 231)
+	Slider.Parent = Bar
+
+	local TextButton = Instance.new("TextButton")
+	TextButton.AnchorPoint = Vector2.new(0.5, 0.5)
+	TextButton.Size = UDim2.new(0, 10, 0, 20)
+	TextButton.Position = UDim2.new(1, 0, 0.5, 0)
+	TextButton.BorderSizePixel = 0
+	TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextButton.FontSize = Enum.FontSize.Size14
+	TextButton.TextSize = 14
+	TextButton.RichText = true
+	TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+	TextButton.Text = ""
+	TextButton.Font = Enum.Font.SourceSans
+	TextButton.Parent = Slider
+
+	local TextBox = Instance.new("TextBox")
+	TextBox.AnchorPoint = Vector2.new(1, 0)
+	TextBox.Size = UDim2.new(0, 100, 0, 20)
+	TextBox.Position = UDim2.new(1, 0, 0, 0)
+	TextBox.BorderSizePixel = 0
+	TextBox.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+	TextBox.FontSize = Enum.FontSize.Size14
+	TextBox.TextStrokeTransparency = 0.5
+	TextBox.TextWrapped = true
+	TextBox.TextSize = 14
+	TextBox.TextWrap = true
+	TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextBox.Text = default
+	TextBox.CursorPosition = -1
+	TextBox.Font = Enum.Font.SourceSans
+	TextBox.TextScaled = true
+	TextBox.Parent = Frame
+
+	Frame.Parent = self.List
+	
+	local ap = Vector2.new(Bar.AbsolutePosition.X, Bar.AbsolutePosition.Y)
+	local as = Vector2.new(Bar.AbsoluteSize.X, Bar.AbsoluteSize.Y)
+	local last = TextBox.Text
+	local function textboxUpdate()
+		if tonumber(TextBox.Text) == nil then
+			TextBox.Text = tonumber(last)
+		end
+		local num = math.clamp(tonumber(TextBox.Text),min,max)
+		TextBox.Text = num
+		Slider.Size = UDim2.new(0, ((num / max) * as.X), 1, 0)
+		last = TextBox.Text
+	end
+	textboxUpdate()
+	TextBox.FocusLost:Connect(textboxUpdate)
+	local moved
+	local endcon
+	TextButton.MouseButton1Down:Connect(function()
+		local function move()
+			local maxSize = as.X
+			local size = Slider.Size.X.Offset
+			local num = (size / maxSize)
+			local num100 = max * (size / maxSize)
+			if mouse.X < ap.X then
+				Slider.Size = UDim2.new(0, 0, 1, 0)
+			elseif mouse.X > (ap.X+as.X) then
+				Slider.Size = UDim2.new(1, 0, 1, 0)
+			else
+				Slider.Size = UDim2.new(0, mouse.X-ap.X, 1, 0)
+			end
+			TextBox.Text = num100
+			movedevent:Fire(num100)
+		end
+		move()
+		moved = mouse.Move:Connect(move)
+		endcon = TextButton.MouseButton1Up:Connect(function()
+			endcon:Disconnect()
+			moved:Disconnect()
+		end)
+	end)
+	return setmetatable({
+		onMove = movedevent.Event,
+		getValue = function()
+			return tonumber(TextBox.Text)
+		end,
+		setValue = function(v)
+			if tonumber(v) == nil then return end
+			local num = math.clamp(tonumber(v),min,max)
+			Slider.Size = UDim2.new(0, ((num / max) * as.X), 1, 0)
+			TextBox.Text = num
+			last = TextBox.Text
+		end,
+	},slider)
+end
 function tabb:createToggle(name,func,default)
 	local Toggle = Instance.new("Frame")
 	local ToggleButton = Instance.new("TextButton")

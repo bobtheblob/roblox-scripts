@@ -493,6 +493,7 @@ function gui:newWindow(name)
 					TextBox.Text = tonumber(last)
 				end
 				local num = math.clamp(tonumber(TextBox.Text),min,max)
+				num = math.floor(num)
 				TextBox.Text = num
 				Slider.Size = UDim2.new(0, ((num / max) * as.X), 1, 0)
 				last = TextBox.Text
@@ -502,11 +503,15 @@ function gui:newWindow(name)
 			local moved
 			local endcon
 			TextButton.MouseButton1Down:Connect(function()
+				if moved and endcon then
+					return
+				end
 				local function move()
 					local maxSize = as.X
 					local size = Slider.Size.X.Offset
 					local num = (size / maxSize)
 					local num100 = max * (size / maxSize)
+					num100 = math.floor(num100)
 					if mouse.X < ap.X then
 						Slider.Size = UDim2.new(0, 0, 1, 0)
 					elseif mouse.X > (ap.X+as.X) then
@@ -522,6 +527,8 @@ function gui:newWindow(name)
 				endcon = TextButton.MouseButton1Up:Connect(function()
 					endcon:Disconnect()
 					moved:Disconnect()
+					endcon = nil
+					moved = nil
 				end)
 			end)
 			return {
@@ -532,6 +539,7 @@ function gui:newWindow(name)
 				setValue = function(v)
 					if tonumber(v) == nil then return end
 					local num = math.clamp(tonumber(v),min,max)
+					num = math.floor(num)
 					Slider.Size = UDim2.new(0, ((num / max) * as.X), 1, 0)
 					TextBox.Text = num
 					last = TextBox.Text

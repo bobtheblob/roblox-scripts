@@ -670,7 +670,7 @@ function gui:newWindow(name)
 				end)
 			end
 
-			return setmetatable({
+			return {
 				GetToggled = function()
 					return bool
 				end,
@@ -701,7 +701,7 @@ function gui:newWindow(name)
 						end)
 					end
 				end,
-			},toggle)
+			}
 		end
 		return t
 	end

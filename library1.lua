@@ -688,6 +688,7 @@ function gui:newWindow(name)
 				end,
 			},toggle)
 		end
+		return t
 	end
 	return tabla
 end

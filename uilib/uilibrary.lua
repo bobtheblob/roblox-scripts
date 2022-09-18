@@ -531,7 +531,7 @@ function gui:newWindow(name)
 				end
 				move()
 				moved = mouse.Move:Connect(move)
-				endcon = TextButton.MouseButton1Up:Connect(function()
+				endcon = mouse.Button1Up:Connect(function()
 					endcon:Disconnect()
 					moved:Disconnect()
 					endcon = nil

@@ -493,7 +493,6 @@ function gui:newWindow(name)
 					TextBox.Text = tonumber(last)
 				end
 				local num = math.clamp(tonumber(TextBox.Text),min,max)
-				num = math.floor(num)
 				TextBox.Text = num
 				Slider.Size = UDim2.new(0, ((num / max) * as.X), 1, 0)
 				last = TextBox.Text
@@ -524,8 +523,6 @@ function gui:newWindow(name)
 					if donum then
 						num100 = donum
 					end
-					
-					num100 = math.floor(num100)
 					TextBox.Text = num100
 					movedevent:Fire(num100)
 				end

@@ -496,6 +496,7 @@ function gui:newWindow(name)
 				TextBox.Text = num
 				Slider.Size = UDim2.new(0, ((num / max) * as.X), 1, 0)
 				last = TextBox.Text
+				movedevent:Fire(num)
 			end
 			textboxUpdate()
 			TextBox.FocusLost:Connect(textboxUpdate)
@@ -547,6 +548,7 @@ function gui:newWindow(name)
 					Slider.Size = UDim2.new(0, ((num / max) * as.X), 1, 0)
 					TextBox.Text = num
 					last = TextBox.Text
+					movedevent:Fire(num)
 				end,
 			}
 		end

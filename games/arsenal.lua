@@ -1,4 +1,4 @@
-Drawing.clear()
+
 getgenv().boxes = {}
 local LPlayer = game:GetService("Players").LocalPlayer
 local Camera = workspace.CurrentCamera

@@ -114,7 +114,7 @@ function fakehui()
 end
 local hui = fakehui
 local userealhui = {
-	--[286090429] = true -- arsenal
+	[286090429] = true
 }
 if userealhui[game.PlaceId] then
 	hui = gethui

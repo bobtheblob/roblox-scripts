@@ -1,7 +1,7 @@
 local message = Instance.new("Message")
 message.Parent = workspace
 message.Text = "Getting gamelist"
-local games = loadstring(game:HttpGet'https://raw.githubusercontent.com/bobtheblob/sads/main/gamelist.lua')()
+local games = loadstring(game:HttpGet'https://raw.githubusercontent.com/bobtheblob/roblox-scripts/main/gamelist.lua')()
 if games[game.PlaceId] then
 message.Text = "Found hub for current game"
 wait(1)

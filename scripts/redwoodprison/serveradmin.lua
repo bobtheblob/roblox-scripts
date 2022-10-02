@@ -528,14 +528,19 @@ if not getgenv().rwp_init then
 end
 --
 function dodmg(v,d)
-	if v == fakechar then return end
+	if v == fakechar or v == lplr.Character then return end
 	task.spawn(function()
 		local humano = v:FindFirstChildOfClass("Humanoid")
 		if not humano then return end
-		lplr.Character:PivotTo(humano.RootPart.CFrame*cfn(humano.MoveDirection.X*4,0,2+humano.MoveDirection.Z*4))
+		lplr.Character:PivotTo(humano.RootPart.CFrame*cfn(humano.MoveDirection.X*4,0,humano.MoveDirection.Z*4))
 		local opos = v:GetPivot()
-		wait(.25)
+		local Yes = tick()
+		repeat
+			game:GetService("RunService").Heartbeat:Wait()
+			lplr.Character:PivotTo(humano.RootPart.CFrame*CFrame.new(humano.MoveDirection))
+		until tick()-Yes > .3
 		getgenv()._upsilonLibrary.FireServer("dealMeleeDamage", humano, d)
+		wait(.1)
 		lplr.Character:PivotTo(cfn(0,4005,0))
 	end)
 end

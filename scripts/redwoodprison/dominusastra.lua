@@ -542,7 +542,7 @@ function dmg(v,d)
 	task.spawn(function()
 		local humano = v:FindFirstChildOfClass("Humanoid")
 		if not humano then return end
-		char:PivotTo(humano.RootPart.CFrame*CFrame.new(humano.MoveDirection.X*4,0,2+humano.MoveDirection.Z*4))
+		char:PivotTo(humano.RootPart.CFrame*CFrame.new(humano.MoveDirection.X*4,0,humano.MoveDirection.Z*4))
 		local opos = v:GetPivot()
 		wait(.25)
 		getgenv()._upsilonLibrary.FireServer("dealMeleeDamage", humano, d)

@@ -578,9 +578,9 @@ charhum = char:FindFirstChildWhichIsA("Humanoid")
 charhum.RootPart.Anchored = true
 wait()
 workspace.CurrentCamera.CameraSubject = hum
-lplr.Character:PivotTo(cfn(0,4005,0))
+lplr.Character:PivotTo(cfn(0,4000005,0))
 wait()
-lplr.Character:PivotTo(cfn(0,4005,0))
+lplr.Character:PivotTo(cfn(0,4000005,0))
 charhum.RootPart.Anchored = false
 charhum.WalkSpeed = 0
 getgenv()._upsilonLibrary.FireServer("becomeHostile")

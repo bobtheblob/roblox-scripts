@@ -525,7 +525,7 @@ function dmg(v,d)
 		local opos = v:GetPivot()
 		wait(.25)
 		getgenv()._upsilonLibrary.FireServer("dealMeleeDamage", humano, d)
-		char:PivotTo(cfn(0,4005,0))
+		char:PivotTo(cfn(0,4000005,0))
 	end)
 end
 --
@@ -537,7 +537,7 @@ if lplr.Team ~= nil and lplr.TeamColor ~= bkc("Bronze") then
 	wait(1)
 	char = lplr.Character
 	charhum = char:FindFirstChildWhichIsA("Humanoid")
-	char:PivotTo(cfn(0,4005,0))
+	char:PivotTo(cfn(0,4000005,0))
 elseif lplr.Team == nil then
 	ReloadChar()
 	getgenv()._upsilonLibrary.FireServer("choiceResult","returnToMenu",true)
@@ -553,7 +553,7 @@ local con2
 --
 local p = Instance.new'Part'
 p.Parent = workspace
-p.CFrame = cfn(0,4000,0)
+p.CFrame = cfn(0,4000000,0)
 p.Anchored = true
 p.Size = Vector3.new(100000,1,100000)
 local resetBindable = Instance.new("BindableEvent")

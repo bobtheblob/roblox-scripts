@@ -499,6 +499,21 @@ con = game:GetService("RunService").Heartbeat:Connect(function()
 		end
 	end
 end)
+local plraddcon
+plraddcon = lplr.CharacterAdded:Connect(function(c)
+	c:WaitForChild("Humanoid")
+	char = lplr.Character
+	charhum = char:FindFirstChildWhichIsA("Humanoid")
+	charhum.RootPart.Anchored = true
+	wait()
+	workspace.CurrentCamera.CameraSubject = hum
+	lplr.Character:PivotTo(cfn(0,4000005,0))
+	wait()
+	lplr.Character:PivotTo(cfn(0,4000005,0))
+	charhum.WalkSpeed = 0
+	getgenv()._upsilonLibrary.FireServer("becomeHostile")
+	charhum = char:FindFirstChildWhichIsA("Humanoid")
+end)
 --
 if not getgenv().rwp_init then
 	getgenv().rwp_init = true
@@ -547,7 +562,7 @@ elseif lplr.Team == nil then
 	char = lplr.Character
 	charhum = char:FindFirstChildWhichIsA("Humanoid")
 	char:PivotTo(lastpos)
-	
+
 end
 local con2
 --
@@ -562,6 +577,7 @@ resetBindable.Event:connect(function()
 	lplr.Character = char
 	fakechar:Destroy()
 	char:BreakJoints()
+	plraddcon:Disconnect()
 	game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
 	con:Disconnect()
 	con2:Disconnect(0)
@@ -1503,7 +1519,7 @@ function Astral_Hop()
 		O1:Destroy()
 		O2:Destroy()
 	end))
-	
+
 	UNANCHOR = true
 	RootPart.Anchored = false
 	ATTACK = false

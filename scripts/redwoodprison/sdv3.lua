@@ -1,3 +1,5 @@
+if getgenv().YO then error'You are currently in Fake Character mode' return end
+getgenv().YO = true
 local descons = {}
 --
 local tinsert = table.insert
@@ -535,7 +537,7 @@ resetBindable.Event:connect(function()
 	char = lplr.Character
 	wait()
 	char:PivotTo(lastpos)
-	
+	getgenv().YO = false
 end)
 char = lplr.Character
 charhum = char:FindFirstChildWhichIsA("Humanoid")

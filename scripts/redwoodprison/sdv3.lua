@@ -477,7 +477,7 @@ function dmg(v,d)
 		local opos = v:GetPivot()
 		task.wait(.25)
 		getgenv()._upsilonLibrary.FireServer("dealMeleeDamage", humano, d)
-		char:PivotTo(cfn(0,4005,0))
+		char:PivotTo(cfn(0,4000005,0))
 	end)
 end
 --
@@ -489,7 +489,7 @@ if lplr.Team ~= nil and lplr.TeamColor ~= bkc("Bronze") then
 	wait(1)
 	char = lplr.Character
 	charhum = char:FindFirstChildWhichIsA("Humanoid")
-	char:PivotTo(cfn(0,4005,0))
+	char:PivotTo(cfn(0,4000005,0))
 elseif lplr.Team == nil then
 	ReloadChar()
 	getgenv()._upsilonLibrary.FireServer("choiceResult","returnToMenu",true)
@@ -507,7 +507,7 @@ local con4
 --
 local p = Instance.new'Part'
 p.Parent = workspace
-p.CFrame = cfn(0,4000,0)
+p.CFrame = cfn(0,4000000,0)
 p.Anchored = true
 p.Size = Vector3.new(100000,1,100000)
 local resetBindable = Instance.new("BindableEvent")
@@ -542,9 +542,9 @@ charhum = char:FindFirstChildWhichIsA("Humanoid")
 charhum.RootPart.Anchored = true
 wait()
 workspace.CurrentCamera.CameraSubject = hum
-lplr.Character:PivotTo(cfn(0,4005,0))
+lplr.Character:PivotTo(cfn(0,4000005,0))
 wait()
-lplr.Character:PivotTo(cfn(0,4005,0))
+lplr.Character:PivotTo(cfn(0,4000005,0))
 charhum.RootPart.Anchored = false
 charhum.WalkSpeed = 0
 getgenv()._upsilonLibrary.FireServer("becomeHostile")

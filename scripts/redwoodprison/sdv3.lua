@@ -510,6 +510,11 @@ local plraddcon
 plraddcon = lplr.CharacterAdded:Connect(function(c)
 	c:WaitForChild("Humanoid")
 	char = lplr.Character
+	for i,v in pairs(char:GetDescendants()) do
+		if v:IsA("BasePart") then
+			v.CanTouch = false
+		end
+	end
 	charhum = char:FindFirstChildWhichIsA("Humanoid")
 	charhum.RootPart.Anchored = true
 	wait()
@@ -556,6 +561,11 @@ resetBindable.Event:connect(function()
 	getgenv().YO = false
 end)
 char = lplr.Character
+for i,v in pairs(char:GetDescendants()) do
+	if v:IsA("BasePart") then
+		v.CanTouch = false
+	end
+end
 charhum = char:FindFirstChildWhichIsA("Humanoid")
 charhum.RootPart.Anchored = true
 wait()

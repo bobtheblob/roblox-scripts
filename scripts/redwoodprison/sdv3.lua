@@ -506,6 +506,21 @@ end
 local con2
 local stopfakechar = function()end
 local con4
+local plraddcon
+plraddcon = lplr.CharacterAdded:Connect(function(c)
+	c:WaitForChild("Humanoid")
+	char = lplr.Character
+	charhum = char:FindFirstChildWhichIsA("Humanoid")
+	charhum.RootPart.Anchored = true
+	wait()
+	workspace.CurrentCamera.CameraSubject = hum
+	lplr.Character:PivotTo(cfn(0,4000005,0))
+	wait()
+	lplr.Character:PivotTo(cfn(0,4000005,0))
+	charhum.WalkSpeed = 0
+	getgenv()._upsilonLibrary.FireServer("becomeHostile")
+	charhum = char:FindFirstChildWhichIsA("Humanoid")
+end)
 --
 local p = Instance.new'Part'
 p.Parent = workspace
@@ -520,6 +535,7 @@ resetBindable.Event:connect(function()
 	lplr.Character = char
 	fakechar:Destroy()
 	char:BreakJoints()
+	plraddcon:Disconnect()
 	game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
 	con:Disconnect()
 	if con2 then
@@ -547,12 +563,12 @@ workspace.CurrentCamera.CameraSubject = hum
 lplr.Character:PivotTo(cfn(0,4000005,0))
 wait()
 lplr.Character:PivotTo(cfn(0,4000005,0))
-charhum.RootPart.Anchored = false
 charhum.WalkSpeed = 0
 getgenv()._upsilonLibrary.FireServer("becomeHostile")
 game:GetService("StarterGui"):SetCore("ResetButtonCallback", resetBindable)
 char = lplr.Character
 charhum = char:FindFirstChildWhichIsA("Humanoid")
+
 --- good lord this script is cr fake character
 --[[
 studio dummy v3 - made by Vulnerali
@@ -1155,7 +1171,7 @@ if localuserid == userid then
 		if tfind(partexclusion,workspace.ignore) == nil then
 			tinsert(partexclusion,workspace.ignore)
 		end
-		
+
 		raycastparams.FilterDescendantsInstances = partexclusion
 		uis.MouseIconEnabled,mouse.Icon = true,""
 		cam.CameraSubject,cam.CameraType,cam.FieldOfView,localplayer.CameraMaxZoomDistance,localplayer.CameraMinZoomDistance,localplayer.CameraMode,cam.FieldOfViewMode = c,Enum.CameraType.Custom,70,math.huge,0,Enum.CameraMode.Classic,Enum.FieldOfViewMode.Vertical
@@ -1467,10 +1483,10 @@ con2 = run.RenderStepped:Connect(function()
 		debris:AddItem(r,0)
 		debris:AddItem(h,0) debris:AddItem(t,0) debris:AddItem(la,0) debris:AddItem(ra,0) debris:AddItem(ll,0) debris:AddItem(rl,0)
 	end
-	
+
 end)
 function bindevent()
-	
+
 end
 function trackcancollide(p)
 	local function checkcancollide()

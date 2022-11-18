@@ -561,6 +561,7 @@ end)
 char = lplr.Character
 charhum = char:FindFirstChildWhichIsA("Humanoid")
 charhum.RootPart.Anchored = true
+charhum:SetStateEnabled(Enum.HumanoidStateType.Seated,false) 
 wait()
 workspace.CurrentCamera.CameraSubject = hum
 lplr.Character:PivotTo(cfn(0,4000005,0))

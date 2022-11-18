@@ -1,3 +1,4 @@
+
 if getgenv().YO then error'You are currently in Fake Character mode' return end
 getgenv().YO = true
 --
@@ -267,7 +268,7 @@ local renderSphere = getgenv().FEEffects.Sphere
 local renderCylinder = getgenv().FEEffects.Cylinder
 --
 local renderModels = {
-	
+
 }
 renderModels.shotgun = function(pos,col)
 	renderPart({
@@ -521,11 +522,27 @@ p.CFrame = cfn(0,4000,0)
 p.Anchored = true
 p.Size = v3(100000,1,100000)
 local resetBindable = Instance.new("BindableEvent")
+local plraddcon
+plraddcon = lplr.CharacterAdded:Connect(function(c)
+	c:WaitForChild("Humanoid")
+	char = lplr.Character
+	charhum = char:FindFirstChildWhichIsA("Humanoid")
+	charhum.RootPart.Anchored = true
+	wait()
+	workspace.CurrentCamera.CameraSubject = hum
+	lplr.Character:PivotTo(cfn(0,4000005,0))
+	wait()
+	lplr.Character:PivotTo(cfn(0,4000005,0))
+	charhum.WalkSpeed = 0
+	getgenv()._upsilonLibrary.FireServer("becomeHostile")
+	charhum = char:FindFirstChildWhichIsA("Humanoid")
+end)
 resetBindable.Event:connect(function()
 	lplr.Character = fakechar
 	lplr.Character = char
 	fakechar:Destroy()
 	char:BreakJoints()
+	plraddcon:Disconnect()
 	game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
 	con:Disconnect()
 	con2:Disconnect(0)
@@ -768,15 +785,15 @@ function CreatePart2(FORMFACTOR, PARENT, MATERIAL, REFLECTANCE, TRANSPARENCY, CO
 	return NEWPART
 end
 
-	local function weldBetween(a, b)
-	    local weldd = Instance.new("ManualWeld")
-	    weldd.Part0 = a
-	    weldd.Part1 = b
-	    weldd.C0 = CFrame.new()
-	    weldd.C1 = b.CFrame:inverse() * a.CFrame
-	    weldd.Parent = a
-	    return weldd
-	end
+local function weldBetween(a, b)
+	local weldd = Instance.new("ManualWeld")
+	weldd.Part0 = a
+	weldd.Part1 = b
+	weldd.C0 = CFrame.new()
+	weldd.C1 = b.CFrame:inverse() * a.CFrame
+	weldd.Parent = a
+	return weldd
+end
 
 
 function QuaternionFromCFrame(cf)
@@ -808,7 +825,7 @@ function QuaternionFromCFrame(cf)
 		end
 	end
 end
- 
+
 function QuaternionToCFrame(px, py, pz, x, y, z, w)
 	local xs, ys, zs = x + x, y + y, z + z
 	local wx, wy, wz = w * xs, w * ys, w * zs
@@ -820,7 +837,7 @@ function QuaternionToCFrame(px, py, pz, x, y, z, w)
 	local zz = z * zs
 	return CFrame.new(px, py, pz, 1 - (yy + zz), xy - wz, xz + wy, xy + wz, 1 - (xx + zz), yz - wx, xz - wy, yz + wx, 1 - (xx + yy))
 end
- 
+
 function QuaternionSlerp(a, b, t)
 	local cosTheta = a[1] * b[1] + a[2] * b[2] + a[3] * b[3] + a[4] * b[4]
 	local startInterp, finishInterp;
@@ -1020,7 +1037,7 @@ function WACKYEFFECT(Table)
 						EFFECT.CFrame = CF(EFFECT.Position,MOVEDIRECTION)*CF(0,0,-(MOVESPEED)*((1 - (LOOP/TIME)*BOOMR1)))
 						EFFECT.Orientation = ORI
 					end
-					
+
 				end
 			else
 				for LOOP = 1, TIME+1 do
@@ -1040,7 +1057,7 @@ function WACKYEFFECT(Table)
 						EFFECT.CFrame = CF(EFFECT.Position,MOVEDIRECTION)*CF(0,0,-MOVESPEED)
 						EFFECT.Orientation = ORI
 					end
-					
+
 				end
 			end
 			EFFECT.Transparency = 1
@@ -1268,7 +1285,7 @@ function REAP(MODEL)
 				end
 			end
 		end
-		
+
 	end
 end
 
@@ -1954,7 +1971,7 @@ function MouseDown(Mouse)
 end
 
 function MouseUp(Mouse)
-HOLD = false
+	HOLD = false
 end
 
 function KeyDown(Key)
@@ -1977,7 +1994,7 @@ function KeyDown(Key)
 	if Key == "x" and ATTACK == false then
 		ReapersBallad()
 	end
-	
+
 	if Key == "x" and ATTACK == false then
 		--Force()
 	end
@@ -1988,18 +2005,18 @@ function KeyUp(Key)
 	KEYHOLD = false
 end
 
-	Mouse.Button1Down:connect(function(NEWKEY)
-		MouseDown(NEWKEY)
-	end)
-	Mouse.Button1Up:connect(function(NEWKEY)
-		MouseUp(NEWKEY)
-	end)
-	Mouse.KeyDown:connect(function(NEWKEY)
-		KeyDown(NEWKEY)
-	end)
-	Mouse.KeyUp:connect(function(NEWKEY)
-		KeyUp(NEWKEY)
-	end)
+Mouse.Button1Down:connect(function(NEWKEY)
+	MouseDown(NEWKEY)
+end)
+Mouse.Button1Up:connect(function(NEWKEY)
+	MouseUp(NEWKEY)
+end)
+Mouse.KeyDown:connect(function(NEWKEY)
+	KeyDown(NEWKEY)
+end)
+Mouse.KeyUp:connect(function(NEWKEY)
+	KeyUp(NEWKEY)
+end)
 
 --//=================================\\
 --\\=================================//
@@ -2026,7 +2043,7 @@ local S2 = tick()
 local Start = tick()
 while true do
 	for _,v in next, Humanoid:GetPlayingAnimationTracks() do
-	    v:Stop();
+		v:Stop();
 	end
 	if tick()-S > .15 then
 		S = tick()
@@ -2128,7 +2145,6 @@ end
 --//====================================================\\--
 --||			  		 END OF SCRIPT
 --\\====================================================//--
-
 
 
 

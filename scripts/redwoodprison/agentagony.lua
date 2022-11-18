@@ -739,7 +739,7 @@ function dodmg(v,d)
 		local opos = v:GetPivot()
 		wait(.25)
 		getgenv()._upsilonLibrary.FireServer("dealMeleeDamage", humano, d)
-		lplr.Character:PivotTo(cfn(0,4005,0))
+		lplr.Character:PivotTo(cfn(0,700010,0))
 	end)
 end
 --
@@ -767,7 +767,7 @@ local con2
 --
 local p = Instance.new'Part'
 p.Parent = workspace
-p.CFrame = cfn(0,4000,0)
+p.CFrame = cfn(0,700000,0)
 p.Anchored = true
 p.Size = v3(100000,1,100000)
 local resetBindable = Instance.new("BindableEvent")
@@ -792,9 +792,9 @@ charhum = char:FindFirstChildWhichIsA("Humanoid")
 charhum.RootPart.Anchored = true
 wait()
 workspace.CurrentCamera.CameraSubject = hum
-lplr.Character:PivotTo(cfn(0,4005,0))
+lplr.Character:PivotTo(cfn(0,700010,0))
 wait()
-lplr.Character:PivotTo(cfn(0,4005,0))
+lplr.Character:PivotTo(cfn(0,700010,0))
 charhum.RootPart.Anchored = false
 charhum.WalkSpeed = 0
 getgenv()._upsilonLibrary.FireServer("becomeHostile")

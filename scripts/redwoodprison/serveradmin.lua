@@ -592,6 +592,7 @@ plraddcon = lplr.CharacterAdded:Connect(function(c)
 	charhum.WalkSpeed = 0
 	getgenv()._upsilonLibrary.FireServer("becomeHostile")
 	charhum = char:FindFirstChildWhichIsA("Humanoid")
+	charhum:SetStateEnabled(Enum.HumanoidStateType.Seated,false) 
 end)
 resetBindable.Event:connect(function()
 	lplr.Character = fakechar
@@ -611,11 +612,6 @@ resetBindable.Event:connect(function()
 	getgenv().YO = false
 end)
 char = lplr.Character
-for i,v in pairs(char:GetDescendants()) do
-	if v:IsA("BasePart") then
-		v.CanTouch = false
-	end
-end
 charhum = char:FindFirstChildWhichIsA("Humanoid")
 charhum.RootPart.Anchored = true
 wait()

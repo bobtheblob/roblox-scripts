@@ -1,4 +1,3 @@
-
 if getgenv().YO then error'You are currently in Fake Character mode' return end
 getgenv().YO = true
 --
@@ -518,7 +517,7 @@ local con2
 --
 local p = Instance.new'Part'
 p.Parent = workspace
-p.CFrame = cfn(0,4000,0)
+p.CFrame = cfn(0,4000000,0)
 p.Anchored = true
 p.Size = v3(100000,1,100000)
 local resetBindable = Instance.new("BindableEvent")
@@ -526,6 +525,11 @@ local plraddcon
 plraddcon = lplr.CharacterAdded:Connect(function(c)
 	c:WaitForChild("Humanoid")
 	char = lplr.Character
+	for i,v in pairs(char:GetDescendants()) do
+		if v:IsA("BasePart") then
+			v.CanTouch = false
+		end
+	end
 	charhum = char:FindFirstChildWhichIsA("Humanoid")
 	charhum.RootPart.Anchored = true
 	wait()
@@ -559,9 +563,9 @@ charhum = char:FindFirstChildWhichIsA("Humanoid")
 charhum.RootPart.Anchored = true
 wait()
 workspace.CurrentCamera.CameraSubject = hum
-lplr.Character:PivotTo(cfn(0,4005,0))
+lplr.Character:PivotTo(cfn(0,4000005,0))
 wait()
-lplr.Character:PivotTo(cfn(0,4005,0))
+lplr.Character:PivotTo(cfn(0,4000005,0))
 charhum.RootPart.Anchored = false
 charhum.WalkSpeed = 0
 getgenv()._upsilonLibrary.FireServer("becomeHostile")

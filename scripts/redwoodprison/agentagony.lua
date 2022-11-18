@@ -771,11 +771,27 @@ p.CFrame = cfn(0,700000,0)
 p.Anchored = true
 p.Size = v3(100000,1,100000)
 local resetBindable = Instance.new("BindableEvent")
+local plraddcon
+plraddcon = lplr.CharacterAdded:Connect(function(c)
+	c:WaitForChild("Humanoid")
+	char = lplr.Character
+	charhum = char:FindFirstChildWhichIsA("Humanoid")
+	charhum.RootPart.Anchored = true
+	wait()
+	workspace.CurrentCamera.CameraSubject = hum
+	lplr.Character:PivotTo(cfn(0,4000005,0))
+	wait()
+	lplr.Character:PivotTo(cfn(0,4000005,0))
+	charhum.WalkSpeed = 0
+	getgenv()._upsilonLibrary.FireServer("becomeHostile")
+	charhum = char:FindFirstChildWhichIsA("Humanoid")
+end)
 resetBindable.Event:connect(function()
 	lplr.Character = fakechar
 	lplr.Character = char
 	fakechar:Destroy()
 	char:BreakJoints()
+	plraddcon:Disconnect()
 	game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
 	con:Disconnect()
 	con2:Disconnect(0)
@@ -2709,7 +2725,7 @@ while true do
 		lt = tick()
 		if IntroDone then
 			renderModels.Shedo(FakeHead.CFrame)
-			
+
 		end
 		if CurrentWep == "Shotgun" then
 			getgenv().FEEffects.Part({

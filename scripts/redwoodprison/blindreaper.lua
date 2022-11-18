@@ -411,7 +411,7 @@ local fakechar = game:GetService("Players"):CreateHumanoidModelFromDescription(I
 local lastpos = lplr.Character:GetPivot()
 fakechar:PivotTo(lastpos)
 fakechar.Parent = workspace
-lplr.Character:PivotTo(cfn(0,100,0))
+lplr.Character:PivotTo(cfn(0,400000,0))
 wait()
 local con
 local hum = fakechar:FindFirstChildWhichIsA("Humanoid")
@@ -489,7 +489,7 @@ function dodmg(v,d)
 		local opos = v:GetPivot()
 		wait(.25)
 		getgenv()._upsilonLibrary.FireServer("dealMeleeDamage", humano, d)
-		lplr.Character:PivotTo(cfn(0,4005,0))
+		lplr.Character:PivotTo(cfn(0,400005,0))
 	end)
 end
 --
@@ -501,7 +501,7 @@ if lplr.Team ~= nil and lplr.TeamColor ~= bkc("Bronze") then
 	wait(1)
 	char = lplr.Character
 	charhum = char:FindFirstChildWhichIsA("Humanoid")
-	char:PivotTo(cfn(0,4005,0))
+	char:PivotTo(cfn(0,400005,0))
 elseif lplr.Team == nil then
 	ReloadChar()
 	getgenv()._upsilonLibrary.FireServer("choiceResult","returnToMenu",true)

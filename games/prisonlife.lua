@@ -50,6 +50,7 @@ local lastctrl = {f = 0, b = 0, l = 0, r = 0}
 local maxspeed = 50
 local speed = 0
 local mainfly
+local lastmod = {}
 --
 function addcon(event)
 	table.insert(cons,event)
@@ -174,6 +175,34 @@ for i,v in pairs(workspace:GetDescendants()) do
 	end
 end
 --
+function getweapon()
+	for i,v in pairs(lplr.Character:children()) do
+		if v:FindFirstChild("GunStates") and v.Name ~= "Taser" then
+			return v
+		end
+	end
+	for i,v in pairs(lplr.Backpack:children()) do
+		if v:FindFirstChild("GunStates") and v.Name ~= "Taser" then
+			return v
+		end
+	end
+end
+function createbullet(hit,bullets)
+	local bulletlist = {}
+	for i = 1,bullets do
+		table.insert(bulletlist,{
+			["RayObject"] = Ray.new((hit.CFrame*CFrame.new(0,0,.5)).Position, hit.CFrame.LookVector.Unit*8),
+			["Distance"] = 1,
+			["Cframe"] = hit.CFrame*CFrame.new(0,0,.1),
+			["Hit"] = hit
+		})
+	end
+	game:GetService("ReplicatedStorage").ShootEvent:FireServer({
+		bulletlist,
+		getweapon()
+	})
+end
+--
 function teleport(plr,pos)
 	if plr == char then return end
 	task.wait(.2)
@@ -198,16 +227,15 @@ function teleport(plr,pos)
 		tool = char:FindFirstChild("M9") or lplr.Backpack:FindFirstChild("M9")
 	end
 	tool.Parent = char
-	local timer = 0
+	local timer = tick()
 	repeat
 		task.wait()
-		plr:PivotTo(clone.RootPart.CFrame*CFrame.new(.3,0,-.75))
-		timer = timer + 1
+		plr:PivotTo(clone.RootPart.CFrame*CFrame.new(.3,0,0))
 		if tool.Parent ~= plr and tool.Parent ~= char then
 			itemhandler:InvokeServer(m9.ITEMPICKUP)
 			tool = char:FindFirstChild("M9") or lplr.Backpack:FindFirstChild("M9")
 		end
-	until tool.Parent == plr or timer > 100
+	until tool.Parent == plr or tick()-timer > 5.5
 	task.wait(.2)
 	loadchar:InvokeServer()
 	char:PivotTo(storedpos)
@@ -224,25 +252,26 @@ local teleports = {
 	cell = CFrame.new(916, 101, 2421),
 	behindcell = CFrame.new(985, 99, 2417),
 	office = CFrame.new(691, 101, 2339),
-	
+
 	crimbase_outside = CFrame.new(-921, 96, 2138),
 	crimbase_inside = CFrame.new(-976, 110, 2062),
 	crimbase_armory = CFrame.new(-944, 95, 2062),
-	
+
 	bridge_basement = CFrame.new(-41, 14, 1300),
 	armoryplus = CFrame.new(401, 17, 1141),
 	lakesidegrocer = CFrame.new(473, 16, 1139),
-	
+
 	secret1 = CFrame.new(-341, 78, 1806),
 	secret2 = CFrame.new(-299, 100, 2028),
 	secret3 = CFrame.new(-691, 69, 2583),
 	secret4 = CFrame.new(905, 162, 2945),
 	secret5 = CFrame.new(277, 64, 2376),
 	secret6 = CFrame.new(1109, 22, 1489),
-	
+
 	neutralspawn = CFrame.new(880, 31, 2346),
 }
 --
+local loopkill = {}
 local playersfunc = {
 	goto = function(plr)
 		if not plr.Character then return end
@@ -256,6 +285,14 @@ local playersfunc = {
 		notify({
 			text = plr.DisplayName.."'s TeamColor : "..tostring(plr.TeamColor)
 		})
+	end,
+	loopkill = function(plr)
+		if table.find(loopkill,plr) then return end
+		table.insert(loopkill,plr)
+	end,
+	unloopkill = function(plr)
+		if table.find(loopkill,plr) == nil then return end
+		table.remove(loopkill,table.find(loopkill,plr))
 	end,
 }
 -- teams
@@ -347,6 +384,7 @@ tab3_b1:createButton("mod weapon",function()
 	local tool = char:FindFirstChildWhichIsA("Tool")
 	if tool and tool:FindFirstChild("GunStates") then
 		local module = require(tool:FindFirstChild("GunStates"))
+		lastmod[tool.Name] = wepsettings
 		for i,v in pairs(wepsettings) do
 			module[i] = v
 		end
@@ -355,6 +393,7 @@ end)
 -- weapons
 local ignores = {"Lunch","Breakfast","Dinner","nil"}
 local tab4 = window:createTab("weapons")
+local pickups = {}
 for i,v in pairs(giver:children()) do
 	local premium = v:FindFirstChild("premiumType")
 	local pickup = v:FindFirstChild("ITEMPICKUP")
@@ -362,6 +401,7 @@ for i,v in pairs(giver:children()) do
 		if premium and premium.Value == "Riot Police" and not owns_riotpolice then
 			continue
 		end
+		table.insert(pickups,pickup)
 		local buttons = tab4:createButtons()
 		buttons:createButton(v.Name,function()
 			itemhandler:InvokeServer(pickup)
@@ -388,8 +428,6 @@ for i,v in pairs(playersfunc) do
 		end
 	end)
 end
-
-
 -- misc
 local tab1234 = window:createTab("misc")
 local tab1234_b = tab1234:createButtons()
@@ -402,18 +440,47 @@ tab1234_b:createButton("collect key cards",function()
 	end
 end)
 --
+local diedtimes = 0
 function charsetup()
-	if lplr.Team == nil and not fastrespawn and respawned then
+	local respawnplace = lplr.Team == nil and not fastrespawn and respawned
+	if fastrespawned then
+		fastrespawned = false
+		diedtimes = diedtimes + 1
+		task.delay(5,function()
+			diedtimes = 0
+		end)
+		if diedtimes >= 4 then
+			respawnplace = true
+		else
+			char:PivotTo(lastpos)
+		end
+		for i,v in pairs(pickups) do
+			task.spawn(function()
+				itemhandler:InvokeServer(v)
+				local tol
+				repeat
+					task.wait()
+					tol = lplr.Backpack:FindFirstChild(v.Parent.Name)
+					if not tol then
+						tol = char:FindFirstChild(v.Parent.Name)
+					end
+				until tol
+				if lastmod[tol.Name] and tol:FindFirstChild("GunStates") then
+					local module = require(tol:FindFirstChild("GunStates"))
+					for i,v in pairs(lastmod[tol.Name]) do
+						module[i] = v
+					end
+				end
+			end)
+		end
+	end
+	if respawnplace then
 		local selectspawn = spawns[math.random(1,#spawns)]
 		local offset = CFrame.new()
 		if selectspawn.AllowTeamChangeOnTouch then
 			offset = CFrame.new(0,0,-5)
 		end
 		char:PivotTo(selectspawn.CFrame*CFrame.new(0,4,0)*offset)
-	end
-	if fastrespawned then
-		fastrespawned = false
-		char:PivotTo(lastpos)
 	end
 	mainfly = flysetup(isflying)
 	if airswim then
@@ -494,6 +561,11 @@ addcon(game:GetService("RunService").Stepped:Connect(function()
 	end
 end))
 addcon(game:GetService("RunService").Heartbeat:Connect(function()
+	for i,v in pairs(loopkill) do
+		if v.Character then
+			createbullet(v.Character:FindFirstChildWhichIsA("BasePart"),15)
+		end
+	end
 	if char and hum then
 		if airswim then
 			hum.RootPart.Velocity = ((hum.MoveDirection ~= Vector3.new() or uis:IsKeyDown(Enum.KeyCode.Space)) and hum.RootPart.Velocity or Vector3.new())

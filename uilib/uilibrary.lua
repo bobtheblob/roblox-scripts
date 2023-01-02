@@ -360,10 +360,10 @@ function gui:newWindow(name)
 			
 			local ts = {}
 			function ts:getText()
-				return TextBox.Text
+				return TextBox_2.Text
 			end
 			function ts:update(txt)
-				TextBox.Text = txt
+				TextBox_2.Text = txt
 			end
 			return ts
 		end

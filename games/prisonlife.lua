@@ -5,7 +5,7 @@ end
 function httprequire(link)
 	return loadstring(game:HttpGet(link))()
 end
-local lib = httprequire("https://raw.githubusercontent.com/bobtheblob/roblox-scripts/main/uilib/uilibrary.lua")
+local lib = httprequire("https://raw.githubusercontent.com/bobtheblob/roblox-scripts/main/uilib/uilib.lua")
 local remotes = workspace:WaitForChild("Remote")
 local loadchar = remotes:WaitForChild("loadchar")
 local itemhandler = remotes:WaitForChild("ItemHandler")

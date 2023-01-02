@@ -291,14 +291,8 @@ local s,f = pcall(function()
 	mt.__namecall = function(self, ...)
 		local arguments = {...}
 		local method = getnamecallmethod()
-
-		if tostring(self) == "HitPart" and method == "FireServer" and Settings.SilentAim and Closestplayer and Closestplayer[2] ~= nil and HealthLib.IsDead(Closestplayer[2]) == false then
-			pcall(function()
-				local char = Closestplayer[2].Character
-				local aimpart = char:FindFirstChild("Head")
-				arguments[1] = aimpart
-			end)
-			return self.FireServer(self,unpack(arguments))
+		if method == "Raycast"  and Settings.SilentAim and Closestplayer and Closestplayer[2] ~= nil and HealthLib.IsDead(Closestplayer[2]) == false then
+			
 		end
 		return old(self, ...) 
 	end

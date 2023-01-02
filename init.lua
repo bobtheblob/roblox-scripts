@@ -15,6 +15,7 @@ message.Text = "Cannot find hub for current game"
 wait(1)
 message.Text = "Loading universal hub"
 wait(.5)
+-- TODO: add a universal hub
 wait(2)
 message:Destroy()
 end
